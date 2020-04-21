@@ -18,5 +18,10 @@ namespace tabuleiro
             this.cor = cor;
             this.qteMovimentos = 0; // Inicia com 0 movimentos no jogo
         }
+
+        public void incrementarQteMovimentos()
+        {
+            qteMovimentos++;
+        }
     }
 }
