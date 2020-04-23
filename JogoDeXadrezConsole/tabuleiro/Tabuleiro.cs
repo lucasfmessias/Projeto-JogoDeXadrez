@@ -5,16 +5,17 @@ namespace tabuleiro
     {
         public int linhas { get; set; }
         public int colunas { get; set; }
+
         private Peca[,] pecas; // Criar uma matriz (private) associada a classe Peca
 
-        public Tabuleiro(int linhas, int colunas)
+        public Tabuleiro(int linhas, int colunas) // Construtor
         {
             this.linhas = linhas;
             this.colunas = colunas;
             pecas = new Peca[linhas, colunas];
         }
 
-        public Peca peca(int linhas, int colunas)
+        public Peca peca(int linhas, int colunas) 
         {
             return pecas[linhas, colunas];
         }
@@ -28,6 +29,23 @@ namespace tabuleiro
         {
             validarPosicao(pos);
             return peca(pos) != null;
+        }
+
+        public void validarPosicao(Posicao pos)
+        {
+            if (!posicaoValida(pos))
+            {
+                throw new TabuleiroException("Posição inválida!");
+            }
+        }
+
+        public bool posicaoValida(Posicao pos)
+        {
+            if (pos.linha < 0 || pos.linha >= linhas || pos.coluna < 0 || pos.coluna >= colunas)
+            {
+                return false;
+            }
+            return true;
         }
 
         public void colocarPeca(Peca p, Posicao pos)
@@ -50,23 +68,6 @@ namespace tabuleiro
             aux.posicao = null;
             pecas[pos.linha, pos.coluna] = null;
             return aux;
-        }
-
-        public bool posicaoValida(Posicao pos)
-        {
-            if (pos.linha < 0 || pos.linha >= linhas || pos.coluna < 0 || pos.coluna>=colunas)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        public void validarPosicao(Posicao pos)
-        {
-            if (!posicaoValida(pos))
-            {
-                throw new TabuleiroException("Posição inválida!");
-            }
         }
     }
 }
